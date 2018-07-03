@@ -1,2 +1,2 @@
 # user-list
-`&lt;user-list>` web component
+`<user-list>` web component
