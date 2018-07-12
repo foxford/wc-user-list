@@ -1,6 +1,7 @@
 module.exports = {
   entry: {
-    demo: './demo/index.js'
+    demo: './demo/index.js',
+    'user-list': './src/user-list.js'
   },
   output: {
     filename: '[name].js'

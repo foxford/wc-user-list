@@ -1,6 +1,6 @@
 {
   "name": "@netology-group/user-list",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "`user-list` web component",
   "main": "src/index.js",
   "scripts": {
