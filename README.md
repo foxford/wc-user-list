@@ -5,7 +5,7 @@
 ## Installation
 
 ```
-npm install --save netology-group/user-list
+npm install --save netology-group/wc-user-list
 ```
 
 ## Example
@@ -61,7 +61,7 @@ userList1.users = [
 To start using `user-list` you need to add next line in your project root.
 
 ```js
-import '@netology-group/user-list/dist/user-list'
+import '@netology-group/wc-user-list/dist/user-list'
 ```
 
 Also you need to add `webcomponents-bundle` polyfill and `custom-elements-es5-adapter` (see [webcomponentsjs](https://github.com/webcomponents/webcomponentsjs)).
@@ -82,7 +82,7 @@ import {
   withFilter,
   withSort,
   withGroup
-} from '@netology-group/user-list'
+} from '@netology-group/wc-user-list'
 
 // custom styles
 const css = `...`
