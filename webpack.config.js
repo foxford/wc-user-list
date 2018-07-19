@@ -15,7 +15,7 @@ module.exports = {
         }
       },
       {
-        test: /\.scss$/,
+        test: /\.css$/,
         use: [
           {
             loader: 'css-loader',
@@ -23,7 +23,7 @@ module.exports = {
               minimize: true
             }
           },
-          'sass-loader'
+          'postcss-loader'
         ]
       },
       {

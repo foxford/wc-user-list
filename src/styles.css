@@ -23,6 +23,7 @@
   line-height: 24px;
   color: #333333;
   outline: none;
+  caret-color: #48a1e6;
 }
 .filter input::placeholder {
   color: #b8b8b8;
@@ -59,7 +60,6 @@
   font-family: inherit;
   font-size: 18px;
   font-weight: bold;
-  //line-height: 26px;
   color: #333333;
 }
 .list .item {
@@ -83,7 +83,6 @@
   height: 32px;
   margin-right: 12px;
   position: relative;
-  -webkit-user-select: none;
   user-select: none;
 }
 .list .item .info .avatar .image {
@@ -125,7 +124,6 @@
   position: relative;
   background: transparent url('./images/lock.svg') center center no-repeat;
   background-size: 100% 100%;
-  -webkit-user-select: none;
   user-select: none;
 }
 .list .item .actions .lock:hover {
