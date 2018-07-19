@@ -1,6 +1,6 @@
 {
   "name": "@netology-group/wc-user-list",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "`user-list` web component",
   "main": "src/index.js",
   "scripts": {
@@ -17,13 +17,13 @@
     "lodash": "~4.17.10"
   },
   "devDependencies": {
+    "autoprefixer": "~9.0.0",
     "babel-core": "~6.26.3",
     "babel-loader": "~7.1.4",
     "babel-plugin-transform-object-rest-spread": "~6.26.0",
     "babel-preset-env": "~1.7.0",
     "css-loader": "~0.28.11",
-    "node-sass": "~4.9.0",
-    "sass-loader": "~7.0.3",
+    "postcss-loader": "~2.1.6",
     "url-loader": "~1.0.1",
     "webpack": "~4.12.0",
     "webpack-cli": "~3.0.6"

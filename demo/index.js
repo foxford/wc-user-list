@@ -5,7 +5,7 @@ import {
   withSort,
   withGroup
 } from '../src'
-import css from '../src/styles.scss'
+import css from '../src/styles.css'
 
 const withGroupConfig = {
   mapping: {

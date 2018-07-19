@@ -5,6 +5,6 @@ import {
   withSort,
   withGroup
 } from './index'
-import css from './styles.scss'
+import css from './styles.css'
 
 window.customElements.define('user-list', withGroup(withSort(withFilter(withStyles(UserList, css.toString())))))
