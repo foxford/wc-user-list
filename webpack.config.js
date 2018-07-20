@@ -17,24 +17,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          {
-            loader: 'css-loader',
-            options: {
-              minimize: true
-            }
-          },
           'postcss-loader'
-        ]
-      },
-      {
-        test: /\.(jpe?g|png|svg|gif)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192
-            }
-          }
         ]
       }
     ]

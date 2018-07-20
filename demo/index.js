@@ -16,4 +16,4 @@ const withGroupConfig = {
   }
 }
 
-window.customElements.define('user-list', withGroup(withSort(withFilter(withStyles(UserList, css.toString()))), withGroupConfig))
+window.customElements.define('user-list', withGroup(withSort(withFilter(withStyles(UserList, css))), withGroupConfig))

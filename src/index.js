@@ -4,7 +4,6 @@ import orderBy from 'lodash/orderBy'
 import groupBy from 'lodash/groupBy'
 
 // todo: extract action mixin (canblock)
-// todo: use PostCSS instead of SCSS
 
 class UserList extends LitElement {
   static get properties () {
