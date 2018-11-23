@@ -1,10 +1,11 @@
 module.exports = {
   entry: {
-    demo: './demo/index.js',
-    'user-list': './src/user-list.js'
+    'user-list': './src/index.js'
   },
   output: {
-    filename: '[name].js'
+    filename: '[name].js',
+    libraryTarget: 'umd',
+    library: 'WCUserList'
   },
   module: {
     rules: [

@@ -60,8 +60,26 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/custom-elements-es5-adapter.js"></script>
-<script src="dist/demo.js"></script>
+<script src="dist/user-list.js"></script>
 <script>
+  var UserList = WCUserList.UserList
+  var mixins = WCUserList.mixins
+  var withStyleLink = mixins.withStyleLink
+  var withFilter = mixins.withFilter
+  var withSort = mixins.withSort
+  var withGroup = mixins.withGroup
+
+  var withGroupConfig = {
+    mapping: {
+      admin: 'Администраторы',
+      lector: 'Лекторы',
+      moderator: 'Модераторы',
+      user: 'Пользователи'
+    }
+  }
+
+  window.customElements.define('user-list', withGroup(withSort(withFilter(withStyleLink(UserList, './src/styles.css'))), withGroupConfig))
+
   var userList1 = document.getElementById('list1')
   var userList2 = document.getElementById('list2')
   var withFilterCheckbox = document.getElementById('withfilter')

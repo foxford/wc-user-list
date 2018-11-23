@@ -106,6 +106,21 @@ function withStyles (baseClass, styles) {
   }
 }
 
+function withStyleLink (baseClass, styleLink) {
+  return class extends baseClass {
+    _renderStyleLink() {
+      return html`<link href$='${styleLink}' rel='stylesheet' type='text/css' />`
+    }
+
+    _render(props) {
+      return html`
+        ${this._renderStyleLink()}
+        ${super._render(props)}
+      `
+    }
+  }
+}
+
 function withFilter (baseClass) {
   return class extends baseClass {
     constructor () {
@@ -252,10 +267,15 @@ function withGroup (baseClass, config) {
   }
 }
 
-export {
-  UserList,
+const mixins = {
   withStyles,
+  withStyleLink,
   withFilter,
   withSort,
   withGroup
+}
+
+export {
+  UserList,
+  mixins
 }

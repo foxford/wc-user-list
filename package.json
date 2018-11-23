@@ -1,8 +1,8 @@
 {
   "name": "@netology-group/wc-user-list",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "`user-list` web component",
-  "main": "src/index.js",
+  "main": "dist/user-list.js",
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development"
