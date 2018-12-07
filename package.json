@@ -5,7 +5,13 @@
   "keywords": [],
   "license": "MIT",
   "author": "Aleksey Konstantinov <a.konstantinov@netology-group.ru>",
+  "files": [
+    "dist"
+  ],
   "main": "dist/user-list.js",
+  "directories": {
+    "lib": "src"
+  },
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development"
