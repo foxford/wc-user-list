@@ -2,15 +2,16 @@
   "name": "@netology-group/wc-user-list",
   "version": "0.3.3",
   "description": "`user-list` web component",
+  "keywords": [],
+  "license": "MIT",
+  "author": "Aleksey Konstantinov <a.konstantinov@netology-group.ru>",
   "main": "dist/user-list.js",
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development"
   },
-  "keywords": [],
-  "author": "Aleksey Konstantinov <a.konstantinov@netology-group.ru>",
-  "license": "MIT",
   "dependencies": {
+    "@netology-group/wc-utils": "^0.3.2",
     "@polymer/lit-element": "~0.5.2",
     "@webcomponents/webcomponentsjs": "~2.0.2",
     "lit-html": "~0.10.2",

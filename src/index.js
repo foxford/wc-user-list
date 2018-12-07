@@ -1,4 +1,5 @@
 import { LitElement, html, classString } from '@polymer/lit-element'
+import { withStyle as _ws, withStyleLink as _wslnk } from '@netology-group/wc-utils'
 import { repeat } from 'lit-html/lib/repeat'
 import orderBy from 'lodash/orderBy'
 import groupBy from 'lodash/groupBy'
@@ -92,34 +93,9 @@ class UserList extends LitElement {
   }
 }
 
-function withStyles (baseClass, styles) {
-  return class extends baseClass {
-    _renderStyles () {
-      return html`<style>${styles}</style>`
-    }
-    _render (props) {
-      return html`
-        ${this._renderStyles()}
-        ${super._render(props)}
-      `
-    }
-  }
-}
+const withStyles = _ws(html)
 
-function withStyleLink (baseClass, styleLink) {
-  return class extends baseClass {
-    _renderStyleLink() {
-      return html`<link href$='${styleLink}' rel='stylesheet' type='text/css' />`
-    }
-
-    _render(props) {
-      return html`
-        ${this._renderStyleLink()}
-        ${super._render(props)}
-      `
-    }
-  }
-}
+const withStyleLink = _wslnk(html)
 
 function withFilter (baseClass) {
   return class extends baseClass {
