@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>UserList</title>
+  <title>UserList demonstration</title>
 
   <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
     .wrapper {
       clear: both;
     }
@@ -19,17 +22,72 @@
 <body>
 <div class="wrapper">
   <div class="container">
-    <user-list id="list" me="3" canBlock withFilter></user-list>
+    <!--<user-list id="list1" me="22" canblock withfilter sortby="online:desc,name:asc,blocked:desc" groupby="role"></user-list>-->
+    <user-list id="list1"></user-list>
+    <br>
+    <br>
+    <br>
+    <form id="list1Form">
+      <label for="withfilter">
+        <input type="checkbox" id="withfilter"> Show filter
+      </label>
+      <br>
+      <label for="canblock">
+        <input type="checkbox" id="canblock"> Enable `lock` action
+      </label>
+      <br>
+      <label for="me">
+        <input type="checkbox" id="me"> Highlight current user (with ID equals 22)
+      </label>
+      <br>
+      <label for="melead">
+        <input type="checkbox" id="melead"> Show me first in list (only if previous checked)
+      </label>
+      <br>
+      <label for="groupby">
+        <input type="checkbox" id="groupby"> Group users by property (`role` in our case)
+      </label>
+      <br>
+      <label for="sortby">
+        <input type="checkbox" id="sortby"> Sort users by multiple properties (`online` (desc), `name` (asc) and `blocked` (desc) in our case)
+      </label>
+    </form>
   </div>
   <div class="container">
-    <user-list id="list2" me="2"></user-list>
+    <user-list id="list2" me="2" sortby="online,name:asc" melead groupby="role"></user-list>
   </div>
 </div>
 
-<script type="module" src="src/index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/custom-elements-es5-adapter.js"></script>
+<script src="./dist/user-list.js"></script>
 <script>
-  var userList = document.getElementById('list')
+  var UserList = WCUserList.UserList
+  var mixins = WCUserList.mixins
+  var withStyleLink = mixins.withStyleLink
+  var withFilter = mixins.withFilter
+  var withSort = mixins.withSort
+  var withGroup = mixins.withGroup
+
+  var withGroupConfig = {
+    mapping: {
+      admin: 'Администраторы',
+      lector: 'Лекторы',
+      moderator: 'Модераторы',
+      user: 'Пользователи'
+    }
+  }
+
+  window.customElements.define('user-list', withGroup(withSort(withFilter(withStyleLink(UserList, './dist/user-list.css'))), withGroupConfig))
+
+  var userList1 = document.getElementById('list1')
   var userList2 = document.getElementById('list2')
+  var withFilterCheckbox = document.getElementById('withfilter')
+  var canBlockCheckbox = document.getElementById('canblock')
+  var meCheckbox = document.getElementById('me')
+  var meLeadCheckbox = document.getElementById('melead')
+  var groupByCheckbox = document.getElementById('groupby')
+  var sortByCheckbox = document.getElementById('sortby')
   var users = [
     {
       "id": 1,
@@ -57,7 +115,7 @@
       "name": "Samara Berens",
       "avatar": "https://robohash.org/nostrumvoluptatesvoluptas.png?size=64x64&set=set1",
       "online": true,
-      "role": "user",
+      "role": "admin",
       "blocked": false
     }, {
       "id": 5,
@@ -92,7 +150,7 @@
       "name": "Ammamaria Messom",
       "avatar": "https://robohash.org/autveleveniet.png?size=64x64&set=set1",
       "online": true,
-      "role": "moderator",
+      "role": "lector",
       "blocked": true
     }, {
       "id": 10,
@@ -113,7 +171,7 @@
       "name": "Mercedes Matusov",
       "avatar": "https://robohash.org/reiciendisautet.png?size=64x64&set=set1",
       "online": true,
-      "role": "moderator",
+      "role": "lector",
       "blocked": true
     }, {
       "id": 13,
@@ -183,7 +241,7 @@
       "name": "Marylinda Wild",
       "avatar": "https://robohash.org/quaeratmodicorporis.png?size=64x64&set=set1",
       "online": true,
-      "role": "moderator",
+      "role": "lector",
       "blocked": false
     }, {
       "id": 23,
@@ -734,9 +792,7 @@
     }
   ]
 
-  users = users.slice(0, 20)
-
-  userList.addEventListener('toggle-user-lock', function (e) {
+  userList1.addEventListener('toggle-user-lock', function (e) {
     const userIndex = users.map(function (item) {return item.id}).indexOf(e.detail.id)
     const action = {
       index: userIndex,
@@ -750,10 +806,25 @@
     updateUserList()
   })
 
+  function handleChangeEvent (attribute, value, e) {
+    if (e.target.checked) {
+      userList1.setAttribute(attribute, value)
+    } else {
+      userList1.removeAttribute(attribute)
+    }
+  }
+
+  withFilterCheckbox.addEventListener('change', handleChangeEvent.bind(null, 'withfilter', null))
+  canBlockCheckbox.addEventListener('change', handleChangeEvent.bind(null, 'canblock', null))
+  meCheckbox.addEventListener('change', handleChangeEvent.bind(null, 'me', '22'))
+  meLeadCheckbox.addEventListener('change', handleChangeEvent.bind(null, 'melead', null))
+  groupByCheckbox.addEventListener('change', handleChangeEvent.bind(null, 'groupby', 'role'))
+  sortByCheckbox.addEventListener('change', handleChangeEvent.bind(null, 'sortby', 'online:desc,name:asc,blocked:desc'))
+
   updateUserList()
 
   function updateUserList () {
-    userList.users = users.slice()
+    userList1.users = users.slice()
     userList2.users = users.slice()
   }
 
