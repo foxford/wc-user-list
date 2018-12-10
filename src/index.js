@@ -1,3 +1,1 @@
-import './user-list.css'
-
-export { UserList, mixins } from './user-list'
+export { UserList, UserListElement, mixins } from './user-list'
