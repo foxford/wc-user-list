@@ -1,6 +1,6 @@
 {
   "name": "@netology-group/wc-user-list",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "`user-list` web component",
   "keywords": [],
   "license": "MIT",
@@ -19,7 +19,9 @@
     "build": "npm run build:es && npm run build:umd:min",
     "build:dev": "BABEL_ENV=umd webpack --mode development",
     "build:es": "BABEL_ENV=es babel --copy-files src -d es",
-    "build:umd:min": "BABEL_ENV=umd webpack --mode production"
+    "build:umd:min": "BABEL_ENV=umd webpack --mode production",
+    "demo": "http-server",
+    "start": "npm run demo"
   },
   "dependencies": {
     "@netology-group/wc-utils": "^0.3.2",
@@ -36,7 +38,6 @@
     "babel-plugin-transform-object-rest-spread": "~6.26.0",
     "babel-preset-env": "~1.7.0",
     "cssnano": "~4.0.3",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "postcss-loader": "~2.1.6",
     "postcss-url": "~7.3.2",
     "style-loader": "^0.23.1",

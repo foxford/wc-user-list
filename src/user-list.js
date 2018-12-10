@@ -4,9 +4,11 @@ import { repeat } from 'lit-html/lib/repeat'
 import orderBy from 'lodash/orderBy'
 import groupBy from 'lodash/groupBy'
 
+import style from './user-list.css'
+
 // todo: extract action mixin (canblock)
 
-class UserList extends LitElement {
+export class UserListElement extends LitElement {
   static get properties () {
     return {
       users: Array,
@@ -93,7 +95,7 @@ class UserList extends LitElement {
   }
 }
 
-const withStyles = _ws(html)
+const withStyle = _ws(html)
 
 const withStyleLink = _wslnk(html)
 
@@ -243,15 +245,12 @@ function withGroup (baseClass, config) {
   }
 }
 
-const mixins = {
-  withStyles,
+export const mixins = {
+  withStyle,
   withStyleLink,
   withFilter,
   withSort,
   withGroup
 }
 
-export {
-  UserList,
-  mixins
-}
+export const UserList = withStyle(UserListElement, style)

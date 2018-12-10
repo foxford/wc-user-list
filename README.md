@@ -24,7 +24,7 @@ HTML:
 ```
 
 You need to pass array of users for list:
- 
+
 ```js
 var userList1 = document.getElementById('list1')
 
@@ -97,6 +97,11 @@ const withGroupConfig = {
 }
 
 window.customElements.define('custom-user-list', withGroup(withSort(withFilter(withStyles(UserList, css))), withGroupConfig))
+```
+
+## Demo
+```bash
+npm start
 ```
 
 ## User object
