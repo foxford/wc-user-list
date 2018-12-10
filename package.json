@@ -1,16 +1,28 @@
 {
   "name": "@netology-group/wc-user-list",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "description": "`user-list` web component",
-  "main": "src/index.js",
-  "scripts": {
-    "build": "webpack --mode production",
-    "build:dev": "webpack --mode development"
-  },
   "keywords": [],
-  "author": "Aleksey Konstantinov <a.konstantinov@netology-group.ru>",
   "license": "MIT",
+  "author": "Aleksey Konstantinov <a.konstantinov@netology-group.ru>",
+  "files": [
+    "dist",
+    "es"
+  ],
+  "main": "dist/user-list.js",
+  "module": "es/user-list.js",
+  "directories": {
+    "lib": "src"
+  },
+  "scripts": {
+    "prebuild": "rm -rf dist es",
+    "build": "npm run build:es && npm run build:umd:min",
+    "build:dev": "BABEL_ENV=umd webpack --mode development",
+    "build:es": "BABEL_ENV=es babel --copy-files src -d es",
+    "build:umd:min": "BABEL_ENV=umd webpack --mode production"
+  },
   "dependencies": {
+    "@netology-group/wc-utils": "^0.3.2",
     "@polymer/lit-element": "~0.5.2",
     "@webcomponents/webcomponentsjs": "~2.0.2",
     "lit-html": "~0.10.2",
@@ -20,11 +32,14 @@
     "autoprefixer": "~9.0.0",
     "babel-core": "~6.26.3",
     "babel-loader": "~7.1.4",
+    "babel-plugin-annotate-pure-calls": "^0.4.0",
     "babel-plugin-transform-object-rest-spread": "~6.26.0",
     "babel-preset-env": "~1.7.0",
     "cssnano": "~4.0.3",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "postcss-loader": "~2.1.6",
     "postcss-url": "~7.3.2",
+    "style-loader": "^0.23.1",
     "webpack": "~4.12.0",
     "webpack-cli": "~3.0.6"
   }
