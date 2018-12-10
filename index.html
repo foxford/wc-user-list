@@ -70,7 +70,6 @@
   function initialize(){
     var UserList = WCUserList.UserList
     var mixins = WCUserList.mixins
-    var withStyleLink = mixins.withStyleLink
     var withFilter = mixins.withFilter
     var withSort = mixins.withSort
     var withGroup = mixins.withGroup
@@ -84,7 +83,7 @@
       }
     }
 
-    window.customElements.define('user-list', withGroup(withSort(withFilter(withStyleLink(UserList, './dist/user-list.css'))), withGroupConfig))
+    window.customElements.define('user-list', withGroup(withSort(withFilter(UserList)), withGroupConfig))
 
     var userList1 = document.getElementById('list1')
     var userList2 = document.getElementById('list2')
