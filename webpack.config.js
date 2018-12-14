@@ -17,12 +17,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: {
-          loader: 'postcss-loader',
-          options: {
-            plugins: []
-          }
-        }
+        use: ['postcss-loader']
       }
     ]
   }
