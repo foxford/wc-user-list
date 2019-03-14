@@ -93,6 +93,7 @@
   background: #d4d4d4;
   border: none;
   border-radius: 100%;
+  overflow: hidden;
 }
 .list .item .info .avatar .status {
   width: 6px;
@@ -118,22 +119,24 @@
   display: flex;
   align-items: center;
 }
-.list .item .actions .lock {
-  width: 16px;
+.list .item .actions .action {
+  width: 22px;
   height: 22px;
+  margin-left: 5px;
   position: relative;
-  background: transparent url('./images/lock.svg') center center no-repeat;
-  background-size: 100% 100%;
+  background-color: transparent;
+  background-position: center center;
+  background-repeat: no-repeat;
   user-select: none;
 }
-.list .item .actions .lock:hover {
-  background-image: url('./images/lock-hover.svg');
+.list .item .actions .action.applicable {
+  cursor: pointer;
 }
-.list .item .actions .lock:active,
-.list .item .actions .lock.active {
-  background-image: url('./images/lock-active.svg');
+.list .item .actions .action.disabled {
+  opacity: .4;
+  cursor: not-allowed;
 }
-.list .item .actions .lock .popover {
+.list .item .actions .action .popover {
   display: none;
   padding: 8px 12px;
   position: absolute;
@@ -148,7 +151,7 @@
   color: #333333;
   white-space: nowrap;
 }
-.list .item .actions .lock .popover::after {
+.list .item .actions .action .popover::after {
   width: 8px;
   height: 8px;
   display: block;
@@ -164,6 +167,9 @@
   border-left: solid 1px transparent;
   transform: rotate(45deg);
 }
-.list .item .actions .lock:hover .popover {
+.list .item .actions .action:hover .popover {
   display: block;
+}
+.list .item .actions .action.disabled:hover .popover {
+  display: none;
 }
