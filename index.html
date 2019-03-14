@@ -36,6 +36,10 @@
         <input type="checkbox" id="canblock"> Enable `lock` action
       </label>
       <br>
+      <label for="cantogglerole">
+        <input type="checkbox" id="cantogglerole"> Enable `toggle role` action
+      </label>
+      <br>
       <label for="me">
         <input type="checkbox" id="me"> Highlight current user (with ID equals 22)
       </label>
@@ -70,6 +74,7 @@
   function initialize(){
     var UserList = WCUserList.UserList
     var mixins = WCUserList.mixins
+    var withActions = mixins.withActions
     var withFilter = mixins.withFilter
     var withSort = mixins.withSort
     var withGroup = mixins.withGroup
@@ -79,16 +84,51 @@
         admin: 'Администраторы',
         lector: 'Лекторы',
         moderator: 'Модераторы',
-        user: 'Пользователи'
+        user: 'Пользователи',
+        'undefined': 'Прочие'
       }
     }
 
-    window.customElements.define('user-list', withGroup(withSort(withFilter(UserList)), withGroupConfig))
+    var withActionsConfig = {
+      canblock: {
+        active: (user) => user.blocked,
+        applicable: (user) => user.blocked !== undefined,
+        eventData: (user) => ({id: user.id}),
+        eventName: 'toggle-user-lock',
+        hint: (user, propertyValue) => propertyValue
+          ? user.blocked
+            ? 'Разблокировать'
+            : 'Заблокировать'
+          : user.blocked
+            ? 'Заблокирован'
+            : 'Разблокирован',
+        icon: 'src/images/lock.svg',
+        iconActive: 'src/images/lock-active.svg',
+        show: (user) => user.blocked,
+      },
+      cantogglerole: {
+        active: (user) => user.role === 'lector',
+        applicable: (user) => user.role === 'user' || user.role === 'lector',
+        eventData: (user) => ({id: user.id}),
+        eventName: 'toggle-user-role',
+        hint: (user, propertyValue) => propertyValue
+          ? user.role === 'lector'
+            ? 'Сделать слушателем'
+            : 'Сделать лектором'
+          : withGroupConfig.mapping[user.role],
+        icon: 'src/images/user.svg',
+        iconActive: 'src/images/user-active.svg',
+        show: (user) => user.role === 'lector',
+      }
+    }
+
+    window.customElements.define('user-list', withActions(withGroup(withSort(withFilter(UserList)), withGroupConfig), withActionsConfig))
 
     var userList1 = document.getElementById('list1')
     var userList2 = document.getElementById('list2')
     var withFilterCheckbox = document.getElementById('withfilter')
     var canBlockCheckbox = document.getElementById('canblock')
+    var canToggleRoleCheckbox = document.getElementById('cantogglerole')
     var meCheckbox = document.getElementById('me')
     var meLeadCheckbox = document.getElementById('melead')
     var groupByCheckbox = document.getElementById('groupby')
@@ -811,6 +851,26 @@
       updateUserList()
     })
 
+    userList1.addEventListener('toggle-user-role', function (e) {
+      const userIndex = users.map(function (item) {
+        return item.id
+      }).indexOf(e.detail.id)
+      const action = {
+        index: userIndex,
+        item: {
+          role: users[userIndex].role === 'user'
+            ? 'lector'
+            : users[userIndex].role === 'lector'
+              ? 'user'
+              : 'user'
+        }
+      }
+
+      users = updateObjectInArray(users, action)
+
+      updateUserList()
+    })
+
     function handleChangeEvent (attribute, value, e) {
       if (e.target.checked) {
         userList1.setAttribute(attribute, value)
@@ -820,9 +880,10 @@
     }
 
     withFilterCheckbox.addEventListener('change', handleChangeEvent.bind(null, 'withfilter', null))
-    canBlockCheckbox.addEventListener('change', handleChangeEvent.bind(null, 'canblock', null))
+    canBlockCheckbox.addEventListener('change', handleChangeEvent.bind(null, 'canblock', true))
+    canToggleRoleCheckbox.addEventListener('change', handleChangeEvent.bind(null, 'cantogglerole', true))
     meCheckbox.addEventListener('change', handleChangeEvent.bind(null, 'me', '22'))
-    meLeadCheckbox.addEventListener('change', handleChangeEvent.bind(null, 'melead', null))
+    meLeadCheckbox.addEventListener('change', handleChangeEvent.bind(null, 'melead', true))
     groupByCheckbox.addEventListener('change', handleChangeEvent.bind(null, 'groupby', 'role'))
     sortByCheckbox.addEventListener('change', handleChangeEvent.bind(null, 'sortby', 'online:desc,name:asc,blocked:desc'))
 
