@@ -69,8 +69,23 @@
 <!--! do not remove -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.1.2/webcomponents-bundle.js"></script>
 
-<script src="./dist/user-list.js"></script>
-<script>
+<script src="//unpkg.com/systemjs/dist/system.min.js"></script>
+<script type="module">
+  const devmode = window.location.search.match('devmode=1')
+
+  const wcReadyP = new Promise((resolve) => {
+    window.document.addEventListener('WebComponentsReady', resolve)
+  })
+
+  Promise.all([
+    devmode
+      ? './dist/user-list.js'
+      : '//unpkg.com/@netology-group/wc-user-list@0.4.2/dist/user-list.js',
+  ].map(System.import.bind(System)).concat(wcReadyP))
+    .then(() => { initialize() })
+    .catch(console.error)
+</script>
+<script defer>
   function initialize(){
     var UserList = WCUserList.UserList
     var mixins = WCUserList.mixins
@@ -904,8 +919,6 @@
       })
     }
   }
-
-  window.document.addEventListener('WebComponentsReady', initialize)
 </script>
 </body>
 </html>

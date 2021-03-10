@@ -1,5 +1,7 @@
 # &lt;user-list&gt;
 
+[![downloads](https://img.shields.io/npm/dm/@netology-group/wc-user-list)](https://www.npmjs.com/package/@netology-group/wc-user-list)
+
 `user-list` is an element for displaying a list of users with their avatars and online statuses that provides useful filtering, sorting and grouping options.
 
 ## Installation

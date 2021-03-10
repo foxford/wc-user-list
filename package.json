@@ -1,6 +1,6 @@
 {
   "name": "@netology-group/wc-user-list",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "`user-list` web component",
   "keywords": [],
   "license": "MIT",
@@ -39,6 +39,7 @@
     "babel-plugin-transform-object-rest-spread": "~6.26.0",
     "babel-preset-env": "~1.7.0",
     "cssnano": "~4.0.3",
+    "http-server": "^0.12.3",
     "postcss-loader": "~2.1.6",
     "postcss-url": "~7.3.2",
     "webpack": "~4.12.0",
