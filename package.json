@@ -1,19 +1,19 @@
 {
   "name": "@netology-group/wc-user-list",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "`user-list` web component",
   "keywords": [],
   "license": "MIT",
   "author": "Aleksey Konstantinov <a.konstantinov@netology-group.ru>",
-  "files": [
-    "dist",
-    "es"
-  ],
   "main": "dist/user-list.js",
   "module": "es/user-list.js",
   "directories": {
     "lib": "src"
   },
+  "files": [
+    "dist",
+    "es"
+  ],
   "scripts": {
     "prebuild": "rm -rf dist es",
     "build": "npm run build:es && npm run build:umd:min",
@@ -21,6 +21,7 @@
     "build:es": "BABEL_ENV=es babel --copy-files src -d es",
     "build:umd:min": "BABEL_ENV=umd webpack --mode production",
     "demo": "http-server",
+    "prepublishOnly": "npm run build",
     "start": "npm run demo"
   },
   "dependencies": {
@@ -39,6 +40,7 @@
     "babel-plugin-transform-object-rest-spread": "~6.26.0",
     "babel-preset-env": "~1.7.0",
     "cssnano": "~4.0.3",
+    "http-server": "^0.12.3",
     "postcss-loader": "~2.1.6",
     "postcss-url": "~7.3.2",
     "webpack": "~4.12.0",

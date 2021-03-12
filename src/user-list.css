@@ -42,7 +42,7 @@
   flex: 1 1 auto;
   margin: 20px;
   overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .list .group {
   margin-top: 20px;
