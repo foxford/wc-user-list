@@ -77,11 +77,13 @@
 .list .item .info {
   display: flex;
   align-items: center;
+  min-width: 0;
 }
 .list .item .info .avatar {
   width: 32px;
   height: 32px;
   margin-right: 12px;
+  flex: 0 0 auto;
   position: relative;
   user-select: none;
 }
@@ -107,10 +109,16 @@
   border-radius: 100%;
 }
 .list .item .info .name {
+  min-width: 0;
   font-family: inherit;
   font-size: 14px;
   line-height: 22px;
   color: #333333;
+}
+.list .item .info .name > div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .list .item .info .name.highlighted {
   color: #48a1e6;

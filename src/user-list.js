@@ -35,7 +35,9 @@ export class UserListElement extends LitElement {
           }
           ${user.online ? html`<div class="status"></div>` : null}
         </div>
-        <div class$="${classString({name: true, highlighted: this._isMe(user, me)})}">${user.name}</div>
+        <div class$="${classString({name: true, highlighted: this._isMe(user, me)})}">
+          <div>${user.name}</div>
+        </div>
       </div>
     `
   }
