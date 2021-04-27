@@ -3,12 +3,12 @@
   height: 100%;
   display: flex;
   flex-flow: column;
-  background: #f8f8f8;
+  background: var(--userList-wrapper-bg, #f8f8f8);
   overflow: hidden;
 }
 .filter {
   flex: 0 1 auto;
-  margin: 20px;
+  margin: var(--userList-filter-margin, 20px);
 }
 .filter input {
   width: 100%;
@@ -40,7 +40,7 @@
 }
 .list {
   flex: 1 1 auto;
-  margin: 20px;
+  margin: var(--userList-list-margin, 20px);
   overflow: hidden;
   overflow-y: auto;
 }
@@ -55,7 +55,7 @@
   padding-bottom: 10px;
   position: sticky;
   top: 0;
-  background: #f8f8f8;
+  background: var(--userList-group-title-bg, #f8f8f8);
   z-index: 1;
   font-family: inherit;
   font-size: 18px;
@@ -63,8 +63,8 @@
   color: #333333;
 }
 .list .item {
-  margin-top: 12px;
-  padding: 10px 20px;
+  margin-top: var(--userList-item-mt, 12px);
+  padding: var(--userList-item-pd, 10px 20px);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -113,7 +113,7 @@
   font-family: inherit;
   font-size: 14px;
   line-height: 22px;
-  color: #333333;
+  color: var(--userList-text-color, #333);
 }
 .list .item .info .name > div {
   overflow: hidden;
