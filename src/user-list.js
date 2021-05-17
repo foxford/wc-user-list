@@ -109,6 +109,7 @@ function withActions(baseClass, config) {
         ? html`
           <div
             class$="${actionClassNames}"
+            data-test-action$="${eventName}"
             style="${actionStyles}"
             on-click="${isApplicable ? clickHandler : null}"
           >
@@ -126,7 +127,7 @@ function withActions(baseClass, config) {
     }
     _renderListItem (user, props) {
       return html`
-        <div class="item">
+        <div class="item" data-test-user-id$="${user.id}">
           ${this._renderUserInfo(user, props)}
           ${this._renderActionsList(user, props)}
         </div>
