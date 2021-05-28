@@ -63,13 +63,17 @@
   color: #333333;
 }
 .list .item {
+  position: relative;
   margin-top: var(--userList-item-mt, 12px);
   padding: var(--userList-item-pd, 10px 20px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fff;
-  border-radius: 5px;
+  background: var(--userList-item-bg, #fff);
+  border-radius: var(--userList-item-br, 5px);
+}
+.list .item:hover {
+  background: var(--userList-item-bg--hover, #fff);
 }
 .list .item:first-child {
   margin-top: 0;
@@ -80,9 +84,9 @@
   min-width: 0;
 }
 .list .item .info .avatar {
-  width: 32px;
-  height: 32px;
-  margin-right: 12px;
+  width: var(--userList-avatar-width, 32px);
+  height: var(--userList-avatar-height, 32px);
+  margin-right: var(--userList-avatar-mr, 12px);
   flex: 0 0 auto;
   position: relative;
   user-select: none;
@@ -126,17 +130,37 @@
 .list .item .actions {
   display: flex;
   align-items: center;
+  background: var(--userList-actions-bg, transparent);
+}
+.list .item:hover .actions {
+  position: var(--userList-actions-position--hover, relative);
+  right: var(--userList-actions-right--hover, 0);
+  padding: var(--userList-actions-pd--hover, 0);
+  background: var(--userList-actions-bg--hover, transparent);
 }
 .list .item .actions .action {
-  width: 22px;
-  height: 22px;
-  margin-left: 5px;
+  width: var(--userList-action-width, 22px);
+  height: var(--userList-action-height, 22px);
+  margin-left: var(--userList-action-ml, 5px);
   position: relative;
   background-color: transparent;
   background-position: center center;
   background-repeat: no-repeat;
+  background-size: var(--userList-action-bgSize, contain);
   user-select: none;
 }
+
+.list .item .actions .action:not(.disabled) {
+  cursor: pointer;
+}
+
+.list .item:hover .actions .action {
+  width: var(--userList-hoveredItem-action-width, 22px);
+  height: var(--userList-hoveredItem-action-height, 22px);
+  margin-left: var(--userList-hoveredItem-action-ml, 5px);
+  background-size: var(--userList-hoveredItem-action-bgSize, contain);
+}
+
 .list .item .actions .action.applicable {
   cursor: pointer;
 }
@@ -145,35 +169,36 @@
   cursor: not-allowed;
 }
 .list .item .actions .action .popover {
-  display: none;
-  padding: 8px 12px;
+  z-index: var(--userList-popover-zIndex, 10);
   position: absolute;
-  top: -6px;
-  right: 30px;
-  border-radius: 2px;
-  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-  border: solid 1px #d4d4d4;
-  font-family: inherit;
-  font-size: 14px;
-  color: #333333;
+  top: var(--userList-popover-top, -6px);
+  right: var(--userList-popover-right, 30px);
+  display: none;
+  opacity: var(--userList-popover-opacity, 1);
+  padding: var(--userList-popover-pd, 8px 12px);
+  border: var(--userList-popover-border, solid 1px #d4d4d4);
+  border-radius: var(--userList-popover-borderRadius, 2px);
+  box-shadow: var(--userList-popover-boxShadow, 0 6px 20px 0 rgba(0, 0, 0, 0.1));
+  background: var(--userList-popover-bg, #fff);
+  font-family: var(--userList-popover-fontFamily, inherit);
+  font-size: var(--userList-popover-fontSize, 14px);
+  color: var(--userList-popover-color, #333);
   white-space: nowrap;
 }
 .list .item .actions .action .popover::after {
-  width: 8px;
-  height: 8px;
-  display: block;
   content: '';
   position: absolute;
-  top: 12px;
-  right: -5px;
-  border-radius: 0 2px 0 0;
-  background-color: #ffffff;
-  border-top: solid 1px #d4d4d4;
-  border-right: solid 1px #d4d4d4;
-  border-bottom: solid 1px transparent;
-  border-left: solid 1px transparent;
-  transform: rotate(45deg);
+  top: var(--userList-popover-arrow-top, 12px);
+  right: var(--userList-popover-arrow-right, -5px);
+  height: var(--userList-popover-arrow-height, 8px);
+  width: var(--userList-popover-arrow-width, 8px);
+  border-top: var(--userList-popover-arrow-borderTop, solid 1px #d4d4d4);
+  border-right: var(--userList-popover-arrow-borderRight, solid 1px #d4d4d4);
+  border-bottom: var(--userList-popover-arrow-borderBottom, solid 1px transparent);
+  border-left: var(--userList-popover-arrow-borderLeft, solid 1px transparent);
+  border-radius: var(--userList-popover-arrow-borderRadius, 0 2px 0 0);
+  background: var(--userList-popover-arrow-bg, #fff);
+  transform: var(--userList-popover-arrow-transform, rotate(45deg));
 }
 .list .item .actions .action:hover .popover {
   display: block;

@@ -91,7 +91,20 @@ function withActions(baseClass, config) {
       this.dispatchEvent(new CustomEvent(eventName, {detail: data}))
     }
     _renderAction (actionProperty, user, props) {
-      const { active, applicable, eventData, eventName, hint, icon, iconActive, show } = config[actionProperty]
+      const {
+        active,
+        applicable,
+        eventData,
+        eventName,
+        hint,
+        icon,
+        iconActive,
+        isHoveredIcon,
+        isHoveredIconActive,
+        isHoveredItemIcon,
+        isHoveredItemIconActive,
+        show
+      } = config[actionProperty]
 
       const propertyValue = props[actionProperty]
       const isActive = active(user)
@@ -103,6 +116,24 @@ function withActions(baseClass, config) {
       const actionStyles = `background-image: url('${isActive ? iconActive : icon}');`
       const clickHandler = () => this._handleActionClick(eventName, eventData(user))
 
+      const updateBackground = (event, isHovered) => {
+        const el = event.target
+
+        const nameIcon = isActive
+          ? isHoveredIconActive && isHovered
+            ? isHoveredIconActive
+            : isHoveredItemIconActive
+              ? isHoveredItemIconActive
+              : iconActive
+          : isHoveredIcon && isHovered
+            ? isHoveredIcon
+            : isHoveredItemIcon
+              ? isHoveredItemIcon
+              : icon
+
+        el.style.backgroundImage = `url('${nameIcon}')`
+      }
+
       const popover = html`<div class="popover">${hintValue}</div>`
 
       return visible
@@ -112,6 +143,8 @@ function withActions(baseClass, config) {
             data-test-action$="${eventName}"
             style="${actionStyles}"
             on-click="${isApplicable ? clickHandler : null}"
+            onmouseenter="${(e) => updateBackground(e, true)}"
+            onmouseleave="${(e) => updateBackground(e, false)}"
           >
             ${popover}
           </div>
@@ -126,8 +159,28 @@ function withActions(baseClass, config) {
       `
     }
     _renderListItem (user, props) {
+      const updateBackgroundAction = (event, isHoveredItem) => {
+        const actions = event.target.querySelectorAll('.action')
+
+        actions.forEach(a => {
+          const eventName = a.getAttribute('data-test-action')
+          const configItem = Object.values(config).find(c => c.eventName === eventName)
+          const { active, isHoveredItemIcon, isHoveredItemIconActive, iconActive, icon } = configItem
+          const isActive = active(user)
+
+          a.style.backgroundImage = `url('${isHoveredItemIcon && isHoveredItem
+            ? isActive ? isHoveredItemIconActive : isHoveredItemIcon
+            : isActive ? iconActive : icon
+          }')`
+        })
+      }
+
       return html`
-        <div class="item" data-test-user-id$="${user.id}">
+        <div
+          class="item" data-test-user-id$="${user.id}"
+          onmouseenter="${(e) => updateBackgroundAction(e, true)}"
+          onmouseleave="${(e) => updateBackgroundAction(e, false)}"
+        >
           ${this._renderUserInfo(user, props)}
           ${this._renderActionsList(user, props)}
         </div>
