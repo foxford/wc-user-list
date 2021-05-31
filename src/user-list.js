@@ -10,7 +10,8 @@ export class UserListElement extends LitElement {
   static get properties () {
     return {
       users: Array,
-      me: String
+      me: String,
+      header: String
     }
   }
   _isMe (user, me) {
@@ -48,13 +49,20 @@ export class UserListElement extends LitElement {
       </div>
     `
   }
+  _renderHeader(props) {
+    const { header } = props
+    return header && html`<h1 class="header">${header}</h1>`
+  }
   _renderList (props) {
     const { users } = props
 
     return users && users.length > 0
       ? html`
-        <div class="list">
-          ${repeat(this._selectUsers(props), (user) => this._renderListItem(user, props))}
+        <div class="listWrapper">
+          ${this._renderHeader(props)}
+          <div class="list">
+            ${repeat(this._selectUsers(props), (user) => this._renderListItem(user, props))}
+          </div>
         </div>
       `
       : null
@@ -321,15 +329,18 @@ function withGroup (baseClass, config) {
 
       if (groups) {
         return html`
-          <div class="list">
-            ${repeat(Object.keys(groups).sort(), (key) => html`
-              <div class="group">
-                <div class="group-title">${config && config.mapping ? config.mapping[key] : key}</div>
-                <div>
-                  ${repeat(groups[key], (user) => this._renderListItem(user, props))}
+          <div class="listWrapper">
+            ${super._renderHeader(props)}
+            <div class="list">
+              ${repeat(Object.keys(groups).sort(), (key) => html`
+                <div class="group">
+                  <div class="group-title">${config && config.mapping ? config.mapping[key] : key}</div>
+                  <div>
+                    ${repeat(groups[key], (user) => this._renderListItem(user, props))}
+                  </div>
                 </div>
-              </div>
-            `)}
+              `)}
+            </div>
           </div>
         `
       } else {
