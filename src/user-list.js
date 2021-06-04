@@ -120,9 +120,13 @@ function withActions(baseClass, config) {
       const hintValue = hint(user, propertyValue)
       const visible = propertyValue || show(user)
 
+      const iconName = isActive ? iconActive : icon
       const actionClassNames = classString({action: true, applicable: isApplicable, disabled: propertyValue && !isApplicable})
-      const actionStyles = `background-image: url('${isActive ? iconActive : icon}');`
-      const clickHandler = () => this._handleActionClick(eventName, eventData(user))
+      const actionStyles = `display: ${iconName ? 'flex' : 'none'};background-image: url('${iconName}');`
+      const clickHandler = (event) => {
+        this._handleActionClick(eventName, eventData(user))
+        updateBackground(event, true)
+      }
 
       const updateBackground = (event, isHovered) => {
         const el = event.target
@@ -140,6 +144,7 @@ function withActions(baseClass, config) {
               : icon
 
         el.style.backgroundImage = `url('${nameIcon}')`
+        el.style.display = nameIcon ? 'flex' : 'none'
       }
 
       const popover = html`<div class="popover">${hintValue}</div>`
@@ -176,10 +181,16 @@ function withActions(baseClass, config) {
           const { active, isHoveredItemIcon, isHoveredItemIconActive, iconActive, icon } = configItem
           const isActive = active(user)
 
-          a.style.backgroundImage = `url('${isHoveredItemIcon && isHoveredItem
+          const iconName = isHoveredItemIcon && isHoveredItem
             ? isActive ? isHoveredItemIconActive : isHoveredItemIcon
             : isActive ? iconActive : icon
-          }')`
+
+          if (iconName) {
+            a.style.display = 'flex';
+            a.style.backgroundImage = `url('${iconName}')`
+          } else {
+            a.style.display = 'none';
+          }
         })
       }
 
