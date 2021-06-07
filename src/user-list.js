@@ -181,7 +181,7 @@ function withActions(baseClass, config) {
           const { active, isHoveredItemIcon, isHoveredItemIconActive, iconActive, icon } = configItem
           const isActive = active(user)
 
-          const iconName = isHoveredItemIcon && isHoveredItem
+          const iconName = isHoveredItem && (isHoveredItemIconActive || isHoveredItemIcon)
             ? isActive ? isHoveredItemIconActive : isHoveredItemIcon
             : isActive ? iconActive : icon
 
