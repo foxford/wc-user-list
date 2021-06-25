@@ -119,10 +119,25 @@ function withActions(baseClass, config) {
       const isApplicable = propertyValue && applicable(user)
       const hintValue = hint(user, propertyValue)
       const visible = propertyValue || show(user)
+      const isHovered = Boolean(this.shadowRoot.querySelector(`.item[data-user-id="${user.id}"] .action[data-action="${eventName}"]:hover`));
+      let isHoveredItem = Boolean(this.shadowRoot.querySelector(`.item[data-user-id="${user.id}"]:hover`));
 
-      const iconName = isActive ? iconActive : icon
+      const getIconName = (isIconHovered) => isActive
+        ? isHoveredIconActive && isIconHovered
+          ? isHoveredIconActive
+          : isHoveredItemIconActive && isHoveredItem
+            ? isHoveredItemIconActive
+            : iconActive
+        : isHoveredIcon && isIconHovered
+          ? isHoveredIcon
+          : isHoveredItemIcon && isHoveredItem
+            ? isHoveredItemIcon
+            : icon
+
+      const iconName = getIconName(isHovered)
       const actionClassNames = classString({action: true, applicable: isApplicable, disabled: propertyValue && !isApplicable})
       const actionStyles = `display: ${iconName ? 'flex' : 'none'};background-image: url('${iconName}');`
+
       const clickHandler = (event) => {
         this._handleActionClick(eventName, eventData(user))
         updateBackground(event, true)
@@ -130,21 +145,11 @@ function withActions(baseClass, config) {
 
       const updateBackground = (event, isHovered) => {
         const el = event.target
+        isHoveredItem = Boolean(this.shadowRoot.querySelector(`.item[data-user-id="${user.id}"]:hover`));
+        const iconName = getIconName(isHovered)
 
-        const nameIcon = isActive
-          ? isHoveredIconActive && isHovered
-            ? isHoveredIconActive
-            : isHoveredItemIconActive
-              ? isHoveredItemIconActive
-              : iconActive
-          : isHoveredIcon && isHovered
-            ? isHoveredIcon
-            : isHoveredItemIcon
-              ? isHoveredItemIcon
-              : icon
-
-        el.style.backgroundImage = `url('${nameIcon}')`
-        el.style.display = nameIcon ? 'flex' : 'none'
+        el.style.display = iconName ? 'flex' : 'none'
+        el.style.backgroundImage = `url('${iconName}')`
       }
 
       const popover = html`<div class="popover">${hintValue}</div>`
@@ -153,6 +158,7 @@ function withActions(baseClass, config) {
         ? html`
           <div
             class$="${actionClassNames}"
+            data-action$="${eventName}"
             data-test-action$="${eventName}"
             style="${actionStyles}"
             on-click="${isApplicable ? clickHandler : null}"
@@ -196,7 +202,7 @@ function withActions(baseClass, config) {
 
       return html`
         <div
-          class="item" data-test-user-id$="${user.id}"
+          class="item" data-test-user-id$="${user.id}" data-user-id$="${user.id}"
           onmouseenter="${(e) => updateBackgroundAction(e, true)}"
           onmouseleave="${(e) => updateBackgroundAction(e, false)}"
         >
