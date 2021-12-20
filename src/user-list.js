@@ -118,7 +118,7 @@ function withActions(baseClass, config) {
       const isActive = active(user)
       const isApplicable = propertyValue && applicable(user)
       const hintValue = hint(user, propertyValue)
-      const visible = propertyValue || show(user)
+      const visible = show(user)
       const isHovered = Boolean(this.shadowRoot.querySelector(`.item[data-user-id="${user.id}"] .action[data-action="${eventName}"]:hover`));
       let isHoveredItem = Boolean(this.shadowRoot.querySelector(`.item[data-user-id="${user.id}"]:hover`));
 
@@ -135,8 +135,19 @@ function withActions(baseClass, config) {
             : icon
 
       const iconName = getIconName(isHovered)
-      const actionClassNames = classString({action: true, applicable: isApplicable, disabled: propertyValue && !isApplicable})
-      const actionStyles = `display: ${iconName ? 'flex' : 'none'};background-image: url('${iconName}');`
+      const actionClassNames = classString({
+        action: true,
+        applicable: isApplicable,
+        disabled: propertyValue && !isApplicable
+      })
+      const actionStyles = `
+        --action-height: var(--userList-action-height--${eventName}, var(--userList-action-height));
+        --action-width: var(--userList-action-width--${eventName}, var(--userList-action-width));
+        --hoveredItem-action-height: var(--userList-hoveredItem-action-height--${eventName}, var(--userList-hoveredItem-action-height));
+        --hoveredItem-action-width: var(--userList-hoveredItem-action-width--${eventName}, var(--userList-hoveredItem-action-width));
+        display: ${iconName ? 'flex' : 'none'};
+        background-image: url('${iconName}');
+      `
 
       const clickHandler = (event) => {
         this._handleActionClick(eventName, eventData(user))

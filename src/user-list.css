@@ -15,9 +15,9 @@
 }
 .filter input {
   width: 100%;
-  padding: 14px 40px 14px 20px;
+  padding: var(--userList-filter-input-padding, 14px 40px 14px 20px);
   background: #ffffff url('./images/search.svg') 95% 50% no-repeat;
-  background-size: 16px 16px;
+  background-size: var(--userList-filter-input-bgSize, 16px 16px);
   border-radius: 5px;
   border: solid 1px #d4d4d4;
   box-sizing: border-box;
@@ -29,7 +29,7 @@
   caret-color: #48a1e6;
 }
 .filter input::placeholder {
-  color: #b8b8b8;
+  color: var(--userList-filter-input-placeholder-color, #b8b8b8);
 }
 .filter input:hover,
 .filter input:focus {
@@ -64,14 +64,14 @@
   margin: var(--userList-list-margin, 0);
 }
 .list .group {
-  margin-top: 20px;
+  margin-top: var(--userList-group-mt, 20px);
   position: relative;
 }
 .list .group:first-child {
   margin-top: 0;
 }
 .list .group .group-title {
-  padding-bottom: 10px;
+  padding: var(--userList-group-title-pd, 0 0 10px);;
   position: sticky;
   top: 0;
   background: var(--userList-group-title-bg, #f8f8f8);
@@ -158,8 +158,8 @@
   background: var(--userList-actions-bg--hover, transparent);
 }
 .list .item .actions .action {
-  width: var(--userList-action-width, 22px);
-  height: var(--userList-action-height, 22px);
+  width: var(--action-width, 22px);
+  height: var(--action-height, 22px);
   margin-left: var(--userList-action-ml, 5px);
   position: relative;
   background-color: transparent;
@@ -174,8 +174,8 @@
 }
 
 .list .item:hover .actions .action {
-  width: var(--userList-hoveredItem-action-width, 22px);
-  height: var(--userList-hoveredItem-action-height, 22px);
+  width: var(--hoveredItem-action-width, var(--action-width));
+  height: var(--hoveredItem-action-height, var(--action-height));
   margin-left: var(--userList-hoveredItem-action-ml, 5px);
   background-size: var(--userList-hoveredItem-action-bgSize, contain);
 }
@@ -184,7 +184,6 @@
   cursor: pointer;
 }
 .list .item .actions .action.disabled {
-  opacity: .4;
   cursor: not-allowed;
 }
 .list .item .actions .action .popover {
@@ -198,8 +197,10 @@
   border: var(--userList-popover-border, solid 1px #d4d4d4);
   border-radius: var(--userList-popover-borderRadius, 2px);
   box-shadow: var(--userList-popover-boxShadow, 0 6px 20px 0 rgba(0, 0, 0, 0.1));
+  filter: var(--userList-popover-filter, none);
   background: var(--userList-popover-bg, #fff);
   font-family: var(--userList-popover-fontFamily, inherit);
+  line-height: var(--userList-popover-lineHeight, inherit);
   font-size: var(--userList-popover-fontSize, 14px);
   color: var(--userList-popover-color, #333);
   white-space: nowrap;
