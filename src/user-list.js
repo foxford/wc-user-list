@@ -360,6 +360,7 @@ function withGroup (baseClass, config) {
           <div class="listWrapper">
             ${super._renderHeader(props)}
             <div class="list">
+              ${!Object.keys(groups).length ? html`<div class="list__empty-block">Совпадений не найдено</div>` : null}
               ${repeat(Object.keys(groups).sort(), (key) => html`
                 <div class="group">
                   <div class="group-title">${config && config.mapping ? config.mapping[key] : key}</div>
