@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>FC980BE5-AF9F-4A79-91BE-DD887316783D</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="16" height="16"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="#1A96F6">
+        <g id="Чат" transform="translate(-2274.000000, -1549.000000)">
+            <g id="7" transform="translate(1850.000000, 1459.000000)">
+                <g id="search" transform="translate(424.000000, 90.000000)">
+                    <mask id="mask-2" fill="#1A96F6">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Mask"></g>
+                    <polygon id="Path-4" fill="#1A96F6" points="11.2071068 12.7928932 14.5 16 15.9142136 14.5857864 12.6213203 11.3786797"></polygon>
+                    <path d="M7.5,13 C10.5375661,13 13,10.5375661 13,7.5 C13,4.46243388 10.5375661,2 7.5,2 C4.46243388,2 2,4.46243388 2,7.5 C2,10.5375661 4.46243388,13 7.5,13 Z M7.5,15 C3.35786438,15 0,11.6421356 0,7.5 C0,3.35786438 3.35786438,0 7.5,0 C11.6421356,0 15,3.35786438 15,7.5 C15,11.6421356 11.6421356,15 7.5,15 Z" id="Oval-10" fill="#1A96F6"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
