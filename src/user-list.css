@@ -121,6 +121,28 @@
   border-radius: 100%;
   overflow: hidden;
 }
+.list .item .info .avatar .image--hovered {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--userList-avatar-width, 32px);
+  height: var(--userList-avatar-height, 32px);
+  border-radius: 100%;
+  cursor: pointer;
+}
+.list .item .info .avatar:hover .image--hovered {
+  display: flex;
+}
+.list .item .info .avatar .image--hovered-icon {
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  background: url("./images/pen.svg") center no-repeat, rgba(0,0,0, 0.5);
+  background-size: 16px, 100%;
+}
 .list .item .info .avatar .status {
   width: 6px;
   height: 6px;

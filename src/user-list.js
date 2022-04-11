@@ -11,7 +11,8 @@ export class UserListElement extends LitElement {
     return {
       users: Array,
       me: String,
-      header: String
+      header: String,
+      canclickuseravatar: Boolean,
     }
   }
   _isMe (user, me) {
@@ -25,13 +26,26 @@ export class UserListElement extends LitElement {
     return users
   }
   _renderUserInfo (user, props) {
-    const { me } = props
+    const { canclickuseravatar, me } = props
+    const showEditLink = canclickuseravatar && user.role === 'user'
 
     return html`
       <div class="info">
         <div class="avatar">
           ${user.avatar
-            ? html`<img class="image" src="${user.avatar}" alt="${user.name}">`
+            ? html`
+              <img class="image" src="${user.avatar}" alt="${user.name}">
+              ${showEditLink
+                ? html`
+                  <div
+                    class="image--hovered"
+                    on-click="${() => this.dispatchEvent(new CustomEvent('onclick-user-avatar', {detail: user.id}))}"
+                  >
+                    <div class="image--hovered-icon">
+                  </div>`
+                : null
+              }
+            `
             : html`<div class="image"></div>`
           }
           ${user.online ? html`<div class="status"></div>` : null}
